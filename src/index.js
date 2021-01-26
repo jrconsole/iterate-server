@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 import { typeDefs } from './typeDefs';
 import { resolvers } from './resolvers';
-import { Cat } from './models/Cat';
+import { Cat } from './models/Card';
 const PORT = 4000;
 
 const startServer = async () => {
