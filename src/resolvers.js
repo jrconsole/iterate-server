@@ -3,7 +3,6 @@ import { Reservation } from './models/Reservation';
 
 export const resolvers = {
     Query: {
-        hello: () => "hi",
         cards: () => Card.find(),
         reservations: () => Reservation.find()
     },
