@@ -19,6 +19,7 @@ export const typeDefs = gql`
 
     type Card {
         id: ID!
+        serial: String!
         status: String!
         type: CardType!
         currentLeasee: Person
