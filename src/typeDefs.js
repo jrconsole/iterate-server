@@ -17,6 +17,11 @@ export const typeDefs = gql`
         leasedCards: [Card!]
     }
 
+    input CardInput {
+        serial: String!
+        cardTypeId: String!
+    }
+
     type Card {
         id: ID!
         serial: String!
@@ -24,6 +29,13 @@ export const typeDefs = gql`
         type: CardType!
         currentLeasee: Person
         allLeasees: [Person!]!
+    }
+
+    input CardTypeInput {
+        name: String!
+        variant: String!
+        manufacturer: String!
+        price: Int!
     }
 
     type CardType {
@@ -50,9 +62,11 @@ export const typeDefs = gql`
     }
 
     type Mutation {
-        createCard(name: String!): Card!
+        createCard(card: CardInput!): Card!
         deleteManyCards(name: String!): [Card!]!
         deleteOneCard(name: String!): [Card!]!
+
+        createCardType(type: CardTypeInput!): CardType!
 
         createReservation(reservation: ReservationInput!): Reservation! 
     }
