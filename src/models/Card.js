@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
-import { CardType } from '../schema/CardType';
+import { Board } from '../schema/Board';
+import { Person } from '../schema/Person';
 
 export const Card = mongoose.model('Card', 
     { 
         serial: String,
         status: String,
-        type: CardType,
-        currentLeasee: String,
-        allLeasees: [String]
+        board: Board,
+        currentLeasee: Person,
+        allLeasees: [Person]
     }
 );

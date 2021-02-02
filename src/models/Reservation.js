@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-import { CardType } from '../schema/CardType';
+import { Board } from '../schema/Board';
 
 export const Reservation = mongoose.model('Reservation', 
     { 
-        cardType: CardType, 
+        board: Board, 
         firstName: String,
         lastName: String
     }

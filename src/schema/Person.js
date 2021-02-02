@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-import { Card } from '../schema/Card';
-import { Board } from '../schema/Board';
+import { Board } from './Board';
+import { Card } from './Card';
 
-export const Person = mongoose.model('Person', 
+export const Person = mongoose.Schema(
     { 
         firstName: String,
         lastName: String,

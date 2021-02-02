@@ -3,8 +3,10 @@ const { gql } = require('apollo-server-express');
 export const typeDefs = gql`
     type Query {
         cards: [Card!]!
-        cardTypes: [CardType!]!
+        gpus: [GPU!]!
+        boards: [Board!]!
         reservations: [Reservation!]!
+        suppliers: [Supplier!]!
         people: [Person!]!
     }
 
@@ -13,62 +15,86 @@ export const typeDefs = gql`
         lastName: String!
         email: String!
         phone: String!
-        waitlists: [CardType!]
+        waitlists: [Board!]
         leasedCards: [Card!]
+    }
+
+    input SupplierInput {
+        name: String!
+    }
+
+    type Supplier {
+        id: ID!
+        name: String!
+    }
+
+    input BoardInput {
+        name: String!
+        supplierId: String!
+        gpuId: String!
+        price: Int!
+    }
+
+    type Board {
+        id: ID!
+        name: String!
+        supplier: Supplier!
+        gpu: GPU!
+        price: Int!
+        inventory: Int!
+        quantity: Int!
+    }
+
+    input GPUInput {
+        name: String!
+        supplierId: String! 
+    }
+
+    type GPU {
+        id: ID!
+        name: String!
+        supplier: Supplier!
     }
 
     input CardInput {
         serial: String!
-        cardTypeId: String!
+        boardId: String!
     }
 
     type Card {
         id: ID!
         serial: String!
         status: String!
-        type: CardType!
+        board: Board!
         currentLeasee: Person
         allLeasees: [Person!]!
     }
 
-    input CardTypeInput {
-        name: String!
-        variant: String!
-        manufacturer: String!
-        price: Int!
-    }
-
-    type CardType {
-        id: ID!
-        name: String!
-        variant: String!
-        manufacturer: String!
-        price: Int!
-        inventory: Int!
-        quantity: Int!
-    }
-
     input ReservationInput {
-        cardTypeId: String!
+        boardId: String!
         firstName: String!
         lastName: String!
     }
 
     type Reservation {
         id: ID!
-        cardType: CardType!
+        board: Board!
         firstName: String!
         lastName: String!
     }
 
     type Mutation {
+        createSupplier(supplier: SupplierInput!): Supplier!
+
+        createGPU(gpu: GPUInput!): GPU!
+
+        createBoard(board: BoardInput!): Board!
+
         createCard(card: CardInput!): Card!
-        deleteManyCards(name: String!): [Card!]!
-        deleteOneCard(name: String!): [Card!]!
+        # # deleteManyCards(name: String!): [Card!]!
+        # # deleteOneCard(name: String!): [Card!]!
 
-        createCardType(type: CardTypeInput!): CardType!
-
-        createReservation(reservation: ReservationInput!): Reservation! 
+        # createReservation(reservation: ReservationInput!): Reservation! 
     }
 `;
 
