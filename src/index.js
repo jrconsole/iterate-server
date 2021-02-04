@@ -1,5 +1,6 @@
 const { ApolloServer , gql } = require('apollo-server-express');
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 import { typeDefs } from './typeDefs';
@@ -9,7 +10,7 @@ const PORT = 4000;
 
 const startServer = async () => {
     const app = express();
-
+    app.use(cors);
     const server = new ApolloServer({
         typeDefs, 
         resolvers,
