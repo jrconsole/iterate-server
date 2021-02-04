@@ -12,7 +12,10 @@ const startServer = async () => {
 
     const server = new ApolloServer({
         typeDefs, 
-        resolvers
+        resolvers,
+        playground: {
+            shareEnabled: true
+        }
     });
 
     server.applyMiddleware({ app }); 
