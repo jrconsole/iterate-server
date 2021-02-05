@@ -94,17 +94,29 @@ export const resolvers = {
         //     return Card.find();
         // },
 
-        // createReservation: async (_, { reservation }) => {
-        //     const newRes = new Reservation(
-        //         { 
-        //             cardId: reservation.cardId, 
-        //             firstName: reservation.firstName, 
-        //             lastName: reservation.lastName 
-        //         }
-        //     );
-        //     await newRes.save();
-        //     return newRes;
-        // }
+        createPerson: async (_, { person }) => {
+            const newPerson = new Person({
+                firstName: person.firstName,
+                lastName: person.lastName,
+                email: person.email,
+                phone: person.phone
+            });
+            await newPerson.save();
+            return newPerson;
+        },
+
+        createReservation: async (_, { reservation }) => {
+            const person = await Person.findById(reservation.personId).exec();
+            const board = await Board.findById(reservation.boardId).exec();
+
+            if (!person || !board) {
+                throw new UserInputError('Invalid Person or Board')
+            } else {
+                const newRes = new Reservation({ board, person });
+                await newRes.save();
+                return newRes;
+            }
+        }
     }
 };
 

@@ -8,7 +8,6 @@ export const Person = mongoose.model('Person',
         lastName: String,
         email: String,
         phone: String,
-        waitlists: [Board],
         leasedCards: [Card]
     }
 );

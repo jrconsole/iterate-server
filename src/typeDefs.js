@@ -10,12 +10,19 @@ export const typeDefs = gql`
         people: [Person!]!
     }
 
-    type Person {
+    input PersonInput {
         firstName: String!
         lastName: String!
         email: String!
         phone: String!
-        waitlists: [Board!]
+    }
+
+    type Person {
+        id: ID!
+        firstName: String!
+        lastName: String!
+        email: String!
+        phone: String!
         leasedCards: [Card!]
     }
 
@@ -72,15 +79,13 @@ export const typeDefs = gql`
 
     input ReservationInput {
         boardId: String!
-        firstName: String!
-        lastName: String!
+        personId: String!
     }
 
     type Reservation {
         id: ID!
         board: Board!
-        firstName: String!
-        lastName: String!
+        person: Person!
     }
 
     type Mutation {
@@ -94,7 +99,9 @@ export const typeDefs = gql`
         # # deleteManyCards(name: String!): [Card!]!
         # # deleteOneCard(name: String!): [Card!]!
 
-        # createReservation(reservation: ReservationInput!): Reservation! 
+        createPerson(person: PersonInput!): Person!
+
+        createReservation(reservation: ReservationInput!): Reservation! 
     }
 `;
 

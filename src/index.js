@@ -5,12 +5,11 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 import { typeDefs } from './typeDefs';
 import { resolvers } from './resolvers';
-import { Cat } from './models/Card';
 const PORT = 4000;
 
 const startServer = async () => {
     const app = express();
-    app.use(cors);
+    app.use(cors());
     const server = new ApolloServer({
         typeDefs, 
         resolvers,
