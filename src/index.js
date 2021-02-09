@@ -4,7 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 import { typeDefs } from './typeDefs';
-import { resolvers } from './resolvers';
+import  resolvers  from './resolvers';
 const PORT = 4000;
 
 const startServer = async () => {
