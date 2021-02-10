@@ -5,11 +5,7 @@ import { Board } from '../models/Board';
 
 export default {
     Query: {
-        boards: () => {
-            const boards = Board.find();
-            console.log(boards);
-            return boards; //Board.find()
-        },
+        boards: () => Board.find(),
     },
 
     Mutation: {
