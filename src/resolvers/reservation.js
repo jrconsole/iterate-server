@@ -16,7 +16,13 @@ export default {
             if (!person || !board) {
                 throw new UserInputError('Invalid Person or Board')
             } else {
-                const newRes = new Reservation({ board, person });
+                const newRes = new Reservation(
+                    { 
+                        board, 
+                        person, 
+                        foundersOnly: reservation.foundersOnly 
+                    }
+                );
                 await newRes.save();
                 return newRes;
             }

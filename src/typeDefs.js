@@ -80,12 +80,14 @@ export const typeDefs = gql`
     input ReservationInput {
         boardId: String!
         personId: String!
+        foundersOnly: Boolean!
     }
 
     type Reservation {
         id: ID!
         board: Board!
         person: Person!
+        foundersOnly: Boolean!
     }
 
     type Mutation {
