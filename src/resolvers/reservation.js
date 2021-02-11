@@ -1,7 +1,7 @@
 import { UserInputError } from 'apollo-server-express';
 import { Reservation } from '../models/Reservation';
 import { Person } from '../models/Person';
-import { Board } from '../models/Board';
+import { GPU } from '../models/GPU';
 
 export default {
     Query: {
@@ -11,14 +11,14 @@ export default {
     Mutation: {
         createReservation: async (_, { reservation }) => {
             const person = await Person.findById(reservation.personId).exec();
-            const board = await Board.findById(reservation.boardId).exec();
+            const gpu = await GPU.findById(reservation.gpuId).exec();
 
-            if (!person || !board) {
+            if (!person || !gpu) {
                 throw new UserInputError('Invalid Person or Board')
             } else {
                 const newRes = new Reservation(
                     { 
-                        board, 
+                        gpu, 
                         person, 
                         foundersOnly: reservation.foundersOnly 
                     }

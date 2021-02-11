@@ -78,14 +78,14 @@ export const typeDefs = gql`
     }
 
     input ReservationInput {
-        boardId: String!
+        gpuId: String!
         personId: String!
         foundersOnly: Boolean!
     }
 
     type Reservation {
         id: ID!
-        board: Board!
+        gpu: GPU!
         person: Person!
         foundersOnly: Boolean!
     }
