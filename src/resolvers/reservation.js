@@ -5,7 +5,7 @@ import { GPU } from '../models/GPU';
 
 export default {
     Query: {
-        reservations: () => Reservation.find(),
+        reservations: () => Reservation.find()
     },
 
     Mutation: {
@@ -20,7 +20,8 @@ export default {
                     { 
                         gpu, 
                         person, 
-                        foundersOnly: reservation.foundersOnly 
+                        foundersOnly: reservation.foundersOnly,
+                        date: new Date()
                     }
                 );
                 await newRes.save();

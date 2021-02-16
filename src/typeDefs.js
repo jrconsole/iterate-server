@@ -1,6 +1,7 @@
 const { gql } = require('apollo-server-express');
 
 export const typeDefs = gql`
+   
     type Query {
         cards: [Card!]!
         gpus: [GPU!]!
@@ -88,6 +89,7 @@ export const typeDefs = gql`
         gpu: GPU!
         person: Person!
         foundersOnly: Boolean!
+        date: String!
     }
 
     type Mutation {

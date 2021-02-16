@@ -6,6 +6,7 @@ export const Reservation = mongoose.model('Reservation',
     { 
         gpu: GPU, 
         person: Person,
-        foundersOnly: Boolean
+        foundersOnly: Boolean,
+        date: Date
     }
 );
