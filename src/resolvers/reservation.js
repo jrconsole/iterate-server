@@ -21,12 +21,23 @@ export default {
                         gpu, 
                         person, 
                         foundersOnly: reservation.foundersOnly,
-                        date: new Date()
+                        date: new Date(),
+                        status: 'ACTIVE'
                     }
                 );
                 await newRes.save();
                 return newRes;
             }
+        },
+
+        updateReservation: async (_, { reservationUpdate }) => {
+            const updatedReservation = Reservation.findOneAndUpdate(
+                { _id: reservationUpdate.id },
+                { status: reservationUpdate.status },
+                { returnOriginal: false }
+            );
+
+            return updatedReservation;
         }
     }
 };

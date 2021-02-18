@@ -7,6 +7,11 @@ export const Reservation = mongoose.model('Reservation',
         gpu: GPU, 
         person: Person,
         foundersOnly: Boolean,
-        date: Date
+        date: Date,
+        status: {
+            type: String, 
+            enum: ['ACTIVE', 'LEASED', 'REMOVED'],
+            default: 'ACTIVE'
+        }
     }
 );

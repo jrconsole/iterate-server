@@ -84,12 +84,24 @@ export const typeDefs = gql`
         foundersOnly: Boolean!
     }
 
+    enum ReservationStatus {
+        ACTIVE
+        LEASED
+        REMOVED
+    }
+
+    input ReservationStatusInput {
+        id: String!
+        status: ReservationStatus!
+    }
+
     type Reservation {
         id: ID!
         gpu: GPU!
         person: Person!
         foundersOnly: Boolean!
         date: String!
+        status: ReservationStatus!
     }
 
     type Mutation {
@@ -107,6 +119,7 @@ export const typeDefs = gql`
         createPerson(person: PersonInput!): Person!
 
         createReservation(reservation: ReservationInput!): Reservation! 
+        updateReservation(reservationUpdate: ReservationStatusInput!): Reservation!
     }
 `;
 
