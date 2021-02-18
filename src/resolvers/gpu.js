@@ -24,5 +24,11 @@ export default {
                 return newGPU;
             }
         },
+
+        deleteOneGPU: async (_, { id }) => {
+            await GPU.findOneAndDelete({ _id: id });
+
+            return GPU.find();
+        },
     }
 }

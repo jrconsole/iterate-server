@@ -96,7 +96,8 @@ export const typeDefs = gql`
         createSupplier(supplier: SupplierInput!): Supplier!
 
         createGPU(gpu: GPUInput!): GPU!
-
+        deleteOneGPU(id: String!): [GPU!]!
+        
         createBoard(board: BoardInput!): Board!
 
         createCard(card: CardInput!): Card!
