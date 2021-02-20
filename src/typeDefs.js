@@ -58,6 +58,12 @@ export const typeDefs = gql`
         supplierId: String! 
     }
 
+    input GPUUpdateInput {
+        id: String!
+        name: String,
+        supplierId: String
+    }
+
     type GPU {
         id: ID!
         name: String!
@@ -108,6 +114,7 @@ export const typeDefs = gql`
         createSupplier(supplier: SupplierInput!): Supplier!
 
         createGPU(gpu: GPUInput!): GPU!
+        updateGPU(gpuUpdate: GPUUpdateInput!): GPU!
         deleteOneGPU(id: String!): [GPU!]!
         
         createBoard(board: BoardInput!): Board!

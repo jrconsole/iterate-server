@@ -25,6 +25,29 @@ export default {
             }
         },
 
+        updateGPU: async (_, { gpuUpdate }) => {
+            if (gpuUpdate.supplierId) {
+                const supplier = await Supplier.findById(gpuUpdate.supplierId).exec();
+                if (!supplier) {
+                    throw new UserInputError('Invalid Supplier')
+                } else {
+                    gpuUpdate.supplier = supplier;
+                }
+            }
+
+            const gpuId = gpuUpdate.id;
+            delete gpuUpdate.id;
+            delete gpuUpdate.supplierId;
+
+            const updatedGPU = GPU.findOneAndUpdate(
+                { _id: gpuId},
+                gpuUpdate,
+                { returnOriginal: false}
+            )
+
+            return updatedGPU;
+        },
+
         deleteOneGPU: async (_, { id }) => {
             await GPU.findOneAndDelete({ _id: id });
 
