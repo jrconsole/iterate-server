@@ -5,5 +5,6 @@ export const GPU = mongoose.Schema(
     { 
         name: String,
         supplier: Supplier,
+        price: Number //for display only. Use Board for actual product price
     }
 );

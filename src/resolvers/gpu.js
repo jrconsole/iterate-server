@@ -17,7 +17,8 @@ export default {
                 const newGPU = new GPU(
                     {
                         name: gpu.name,
-                        supplier: supplier
+                        supplier: supplier,
+                        price: gpu.price
                     }
                 );
                 await newGPU.save();

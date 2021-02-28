@@ -56,18 +56,21 @@ export const typeDefs = gql`
     input GPUInput {
         name: String!
         supplierId: String! 
+        price: Int!
     }
 
     input GPUUpdateInput {
         id: String!
-        name: String,
+        name: String
         supplierId: String
+        price: Int
     }
 
     type GPU {
         id: ID!
         name: String!
         supplier: Supplier!
+        price: Int!
     }
 
     input CardInput {
