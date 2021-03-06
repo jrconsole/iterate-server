@@ -5,6 +5,7 @@ export const typeDefs = gql`
     type Query {
         cards: [Card!]!
         gpus: [GPU!]!
+        gpu(id: String!): GPU!
         boards: [Board!]!
         reservations: [Reservation!]!
         suppliers: [Supplier!]!
@@ -57,6 +58,7 @@ export const typeDefs = gql`
         name: String!
         supplierId: String! 
         price: Int!
+        imgURL: String!
     }
 
     input GPUUpdateInput {
@@ -64,6 +66,7 @@ export const typeDefs = gql`
         name: String
         supplierId: String
         price: Int
+        imgURL: String
     }
 
     type GPU {
@@ -71,6 +74,7 @@ export const typeDefs = gql`
         name: String!
         supplier: Supplier!
         price: Int!
+        imgURL: String!
     }
 
     input CardInput {

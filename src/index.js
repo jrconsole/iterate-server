@@ -1,9 +1,8 @@
 const { ApolloServer , gql } = require('apollo-server-express');
 const express = require('express');
 const cors = require('cors');
-const fileUpload = require('express-fileupload');
+//const fileUpload = require('express-fileupload');
 const mongoose = require('mongoose');
-require('dotenv').config();
 import { typeDefs } from './typeDefs';
 import  resolvers  from './resolvers';
 const PORT = 4000;
@@ -11,7 +10,7 @@ const PORT = 4000;
 const startServer = async () => {
     const app = express();
     app.use(cors());
-    app.use(fileUpload());
+    //app.use(fileUpload());
 
     const uploads = require('./upload');
     app.use('/upload', uploads)

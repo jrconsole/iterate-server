@@ -4,7 +4,11 @@ import { Supplier } from '../models/Supplier';
 
 export default {
     Query: {
-        gpus: () => GPU.find()
+        gpus: () => GPU.find(),
+        gpu: async (_, { id }) => {
+            const foundGPU = await GPU.findById(id);
+            return foundGPU
+        }
     },
 
     Mutation: {
@@ -18,7 +22,8 @@ export default {
                     {
                         name: gpu.name,
                         supplier: supplier,
-                        price: gpu.price
+                        price: gpu.price,
+                        imgURL: gpu.imgURL
                     }
                 );
                 await newGPU.save();

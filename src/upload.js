@@ -14,16 +14,16 @@ aws.config.update({
 
 const s3 = new aws.S3();
 
-s3.listBuckets((err, data) => {
-    if (err) {
-        console.log('s3 connection error', err);
-    } else {
-        console.log(data.Buckets)
-    }
-})
+// s3.listBuckets((err, data) => {
+//     if (err) {
+//         console.log('s3 connection error', err);
+//     } else {
+//         console.log(data.Buckets)
+//     }
+// })
 
 const fileFilter = (req, file, cb) => {
-    console.log('filtered files');
+    //console.log('filtered files');
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
         cb(null, true);
     } else {
@@ -33,21 +33,21 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({
     storage: multerS3({
-      s3: s3,
-      bucket: 'iterate-images',
-      metadata: function (req, file, cb) {
-        cb(null, {fieldName: file.fieldname});
-      },
-      key: function (req, file, cb) {
-        cb(null, Date.now().toString())
-      }
+        s3: s3,
+        bucket: 'iterate-images',
+        acl: 'public-read',
+        metadata: function (req, file, cb) {
+          cb(null, {fieldName: file.fieldname});
+        },
+        key: function (req, file, cb) {
+            cb(null, Date.now().toString())
+        }
     }),
     fileFilter
   })
 const singleUpload = upload.single('image');
 
 router.post('/', singleUpload, (req, res) => {
-    console.log(req.files)
     try {
         if (req.file.location) {
             res.status(200).send({ imgURL: req.file.location })
@@ -58,7 +58,6 @@ router.post('/', singleUpload, (req, res) => {
         console.log(error);
         res.status(500).send({response: 'could not update img'})
     }
-
 })
 
 module.exports = router;
