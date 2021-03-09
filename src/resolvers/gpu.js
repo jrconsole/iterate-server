@@ -23,7 +23,8 @@ export default {
                         name: gpu.name,
                         supplier: supplier,
                         price: gpu.price,
-                        imgURL: gpu.imgURL
+                        imgURL: gpu.imgURL,
+                        specs: gpu.specs
                     }
                 );
                 await newGPU.save();

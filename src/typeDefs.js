@@ -59,6 +59,7 @@ export const typeDefs = gql`
         supplierId: String! 
         price: Int!
         imgURL: String!
+        specs: String!
     }
 
     input GPUUpdateInput {
@@ -67,6 +68,7 @@ export const typeDefs = gql`
         supplierId: String
         price: Int
         imgURL: String
+        specs: String
     }
 
     type GPU {
@@ -75,6 +77,7 @@ export const typeDefs = gql`
         supplier: Supplier!
         price: Int!
         imgURL: String!
+        specs: String!
     }
 
     input CardInput {
