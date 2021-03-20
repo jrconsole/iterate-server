@@ -1,7 +1,7 @@
 const { ApolloServer , gql } = require('apollo-server-express');
 const express = require('express');
 const cors = require('cors');
-//const fileUpload = require('express-fileupload');
+require('dotenv').config();
 const mongoose = require('mongoose');
 import { typeDefs } from './typeDefs';
 import  resolvers  from './resolvers';
