@@ -11,22 +11,35 @@ export default {
     Mutation: {
         createReservation: async (_, { reservation }) => {
             const person = await Person.findById(reservation.personId).exec();
-            const gpu = await GPU.findById(reservation.gpuId).exec();
+            const gpus = await GPU.find({ '_id':  { $in: reservation.gpuIds }}).exec();
 
-            if (!person || !gpu) {
+            if (!person || !gpus || !gpus.length) {
                 throw new UserInputError('Invalid Person or Board')
             } else {
-                const newRes = new Reservation(
-                    { 
-                        gpu, 
-                        person, 
-                        foundersOnly: reservation.foundersOnly,
-                        date: new Date(),
-                        status: 'ACTIVE'
-                    }
-                );
-                await newRes.save();
-                return newRes;
+                const completedGPUList = [];
+                let resId;
+                const resDate = new Date();
+                for (const gpu of gpus) {
+                    const newRes = new Reservation(
+                        { 
+                            gpu, 
+                            person, 
+                            foundersOnly: reservation.foundersOnly,
+                            date: resDate,
+                            status: 'ACTIVE'
+                        }
+                    );
+                    await newRes.save();
+                    completedGPUList.push(newRes.gpu);
+                    resId = resId ? resId : newRes.id;
+                }
+                return {
+                    id: resId,
+                    gpus: completedGPUList,
+                    person: person,
+                    foundersOnly: reservation.foundersOnly,
+                    date: resDate,
+                };
             }
         },
 

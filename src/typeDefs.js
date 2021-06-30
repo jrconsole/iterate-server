@@ -95,7 +95,7 @@ export const typeDefs = gql`
     }
 
     input ReservationInput {
-        gpuId: String!
+        gpuIds: [String!]!
         personId: String!
         foundersOnly: Boolean!
     }
@@ -120,6 +120,14 @@ export const typeDefs = gql`
         status: ReservationStatus!
     }
 
+    type NewReservationReturn {
+        id: ID!
+        gpus: [GPU!]!
+        person: Person!
+        foundersOnly: Boolean!
+        date: String!
+    }
+
     type Mutation {
         createSupplier(supplier: SupplierInput!): Supplier!
 
@@ -135,7 +143,7 @@ export const typeDefs = gql`
 
         createPerson(person: PersonInput!): Person!
 
-        createReservation(reservation: ReservationInput!): Reservation! 
+        createReservation(reservation: ReservationInput!): NewReservationReturn! 
         updateReservation(reservationUpdate: ReservationStatusInput!): Reservation!
     }
 `;
